@@ -1,4 +1,4 @@
-[![](https://images.microbadger.com/badges/image/wernight/ngrok.svg)](http://microbadger.com/images/wernight/ngrok "Get your own image badge on microbadger.com") [![Codenvy badge](http://beta.codenvy.com/factory/resources/codenvy-contribute.svg)](http://beta.codenvy.com/f?url=https://github.com/wernight/docker-ngrok 'Start development on Codenvy')
+[![](https://images.microbadger.com/badges/image/colstrom/openjdk.svg)](https://microbadger.com/images/colstrom/openjdk "Get your own image badge on microbadger.com") [![Codenvy badge](http://beta.codenvy.com/factory/resources/codenvy-contribute.svg)](http://beta.codenvy.com/f?url=https://github.com/stroebs/docker-ngrok 'Start development on Codenvy')
 
 A [Docker][docker] image for [ngrok][ngrok] v2, introspected tunnels to localhost.
 It's based on the excellent work of [wizardapps/ngrok][wizardapps/ngrok] and [fnichol/ngrok][fnichol/ngrok].
@@ -13,21 +13,21 @@ It's based on the excellent work of [wizardapps/ngrok][wizardapps/ngrok] and [fn
 
 ## Configuration
 
-To see command-line options, run `docker run --rm wernight/ngrok ngrok --help`.
+To see command-line options, run `docker run --rm stroebs/ngrok ngrok --help`.
 
 
 ## Usage
 
 Supposing you've an Apache or Nginx Docker container named `web_service_container` listening on port 80:
 
-    $ docker run --rm -it --link web_service_container wernight/ngrok ngrok http web_service_container:80
+    $ docker run --rm -it --link web_service_container stroebs/ngrok ngrok http web_service_container:80
 
 
 ### Environment variables
 
 *Please consider using directly the command-line arguments of Ngrok.*
 
-If you use the default `CMD` (i.e. don't specify the ngrok command-line but only `wernight/ngrok`),
+If you use the default `CMD` (i.e. don't specify the ngrok command-line but only `stroebs/ngrok`),
 then you can use instead envrionment variables magic below.
 
 You simply have to link the Ngrok container to the application under the `app` or `http` or `https` aliases, and all of the configuration will be done for you by default.
@@ -55,7 +55,7 @@ Additionally, you can specify one of several environment variable (via `-e`) to 
 
  2. Now we'll link that HTTP server into an ngrok container to expose it on the internet:
 
-        $ docker run -d -p 4040 --link www:http --name www_ngrok wernight/ngrok
+        $ docker run -d -p 4040 --link www:http --name www_ngrok stroebs/ngrok
 
  3. You can now access the [API][ngrok-api] to find the assigned domain:
 
@@ -71,7 +71,7 @@ Additionally, you can specify one of several environment variable (via `-e`) to 
 For common cases you may want to create an alias in your `~/.profile` (or `~/.bashrc`, `~/.zshrc`, or equivalent):
 
     function docker-ngrok() {
-      docker run --rm -it --link "$1":http wernight/ngrok ngrok http http:80
+      docker run --rm -it --link "$1":http stroebs/ngrok ngrok http http:80
     }
     # For ZSH with Oh-My-Zsh! and 'docker' plugin enabled, you can also enable auto-completion:
     #compdef __docker_containers docker-ngrok
